@@ -1,6 +1,7 @@
-<?php
 
-?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +51,7 @@
             border-radius: 5px 0px 0px 0px;
         }
         nav h1 {
-            color: white;: ;
+            color: white; ;
             font-family: cursive;
         }
         #nav-logo {

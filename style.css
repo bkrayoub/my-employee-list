@@ -6,3 +6,5 @@ font-family: cursive;
 color: rgb(255, 255, 255);
 color: #0e0e0e;
 }
+<td>"."<a href= 'edite.php?edit=<?php echo $row['EID']; ?> ' > EDIT </a>
+<a href= 'delet.php?delet=<?php echo $row['EID']; ?>' > DELETE </a>"."</td>

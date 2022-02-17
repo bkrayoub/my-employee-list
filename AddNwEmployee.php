@@ -1,6 +1,39 @@
 <?php
 
+include 'connection.php';
+if(isset($_POST["submit"])){
+    $number = $_POST["input-eid"];
+    $last = $_POST["input-lname"];
+    $first = $_POST["input-fname"];
+    $birth = $_POST["input-dateOfBerth"];
+    $department = $_POST["input-department"];
+    $salary = $_POST["input-salary"];
+    $occupation = $_POST["input-occupation"];
+    $picture = $_FILES["input-Picture"]["name"];
+    $tmp_picture = $_FILES["input-Picture"]["tmp_name"];
+    $fileLocation = "image/" .$picture;
+    
+
+    $sql = "INSERT INTO `employee` (`EID`, `FirstName`, `LastName`, `DateofBirth`, `Department`, `Salary`, `Function`, `Picture`) 
+    VALUES ('$number','$last','$first','$birth','$department','$salary','$occupation','$picture')";
+    $result = mysqli_query($conn,$sql);
+    move_uploaded_file($tmp_picture, $fileLocation);
+        $conn->close();
+    
+   
+    // if($result){
+    //     echo "successful !!!!";
+    // }else{
+    //     die(mysqli_error($conn));
+    // }
+    
+}
+
 ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +83,7 @@
             border-radius: 5px 0px 0px 0px;
         }
         nav h1 {
-            color: white;: ;
+            color: white; ;
             font-family: cursive;
         }
         #nav-logo {
@@ -62,7 +95,7 @@
         ::-webkit-file-upload-button {
             background-color: #000;
         }
-        input {
+        form input {
             background-color : #fff;
             border-radius: 0px solid #fff;
         }
@@ -73,7 +106,7 @@
             justify-content: center;
             align-items: center;
         }
-        #{}
+        
     </style>
 </head>
 <body>
@@ -89,19 +122,20 @@
         </aside>
         <main>
             <div class="container">
-                <form action="" method="post">
-                    <label><p>Employee ID</p><input type="text" id="input-eid"></label>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <label><p>Employee ID</p><input type="text" name="input-eid"></label>
                     <div>
-                        <label><p>Employee First Name</p><input type="text" id="input-fname"></label>
-                        <label><p>Employee Last Name</p><input type="text" id="input-lname"></label>
-                        <label><p>Date Of Berth</p><input type="text" id="input-dateOfBerth"></label>
+                        <label><p>Employee First Name</p><input type="text" name="input-fname"></label>
+                        <label><p>Employee Last Name</p><input type="text" name="input-lname"></label>
+                        <label><p>Date Of Birth</p><input type="date" name="input-dateOfBerth"></label>
                     </div>
-                    <label><p>Salary</p><input type="text" id="input-salary"></label>
+                    <label><p>Salary</p><input type="number" name="input-salary"></label>
                     <div>
-                        <label><p>Department</p><input type="text" id="input-department"></label>
-                        <label><p>Function</p><input type="text" id="input-Function"></label>
+                        <label><p>Department</p><input type="text" name="input-department"></label>
+                        <label><p>Function</p><input type="text" name="input-occupation"></label>
                     </div>
-                    <label><p>Picture</p><input type="file" id="input-Picture"></label>
+                    <label><p>Picture</p><input type="file" name="input-Picture"></label>
+                    <input type="submit" value="SUBMIT" name="submit">
                 </form>
             </div>
         </main> 

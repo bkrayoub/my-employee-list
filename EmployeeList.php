@@ -1,6 +1,29 @@
+
 <?php
 
-?>
+$dbServername = "localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbName = "gestion_employee";
+
+$conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+
+    $sql = "SELECT  EID, Picture, FirstName, LastName, DateofBirth, Department, Salary, Function  FROM employee";
+    $displyer = $conn -> query($sql);
+?> 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +73,7 @@
             border-radius: 5px 0px 0px 0px;
         }
         nav h1 {
-            color: white;: ;
+            color: white; ;
             font-family: cursive;
         }
         #nav-logo {
@@ -62,6 +85,8 @@
     </style>
 </head>
 <body>
+
+
     <nav class="bg-dark">
             <div id="nav-logo"><img src="logo.png" alt="My Employee List Logo"><h1>My Employee List</h1></div>
     </nav>
@@ -74,7 +99,44 @@
         </aside>
         <main>
             <div class="container">
-                <h1>biba</h1>
+                <table>
+                    <thead>
+                       <tr>
+                           <th>EID</th>
+                           <th>picture</th>
+                           <th>First Name</th>
+                           <th>Last Name</th>
+                           <th>Date of berth</th>
+                           <th>Department</th>
+                           <th>Salary</th>
+                           <th>Function</th>
+                           <th>Action</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php
+                            if ($displyer->num_rows > 0){
+                                    // output data of each row
+                                while($row = $displyer->fetch_assoc()) {
+                                    echo "<tr>
+                                            <td>".$row["EID"]."</td>
+                                            <td><img src='image/".$row["Picture"]."'></td>
+                                            <td>".$row["FirstName"]."</td>
+                                            <td>".$row["LastName"]."</td>
+                                            <td>".$row["DateofBirth"]."</td>
+                                            <td>".$row["Department"]."</td>
+                                            <td>".$row["Salary"]."</td>
+                                            <td>".$row["Function"]."</td>
+                                        </tr>";
+                                }
+                                echo "</table>";
+                            }else{
+                                echo "0 results";
+                                }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </main> 
     </section>
