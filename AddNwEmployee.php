@@ -14,11 +14,13 @@ if(isset($_POST["submit"])){
     $fileLocation = "image/" .$picture;
     
 
+
     $sql = "INSERT INTO `employee` (`EID`, `FirstName`, `LastName`, `DateofBirth`, `Department`, `Salary`, `Function`, `Picture`) 
     VALUES ('$number','$last','$first','$birth','$department','$salary','$occupation','$picture')";
     $result = mysqli_query($conn,$sql);
+
     move_uploaded_file($tmp_picture, $fileLocation);
-        $conn->close();
+    $conn->close();
     
    
     // if($result){
@@ -111,7 +113,7 @@ if(isset($_POST["submit"])){
 </head>
 <body>
     <nav class="bg-dark">
-            <div id="nav-logo"><img src="logo.png" alt="My Employee List Logo"><h1>My Employee List</h1></div>
+            <div id="nav-logo"><img src="logo.png" alt="My Employee List Logo"><h1>Add Employee</h1></div>
     </nav>
     <section>
         <aside class="bg-dark">
@@ -122,7 +124,7 @@ if(isset($_POST["submit"])){
         </aside>
         <main>
             <div class="container">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     <label><p>Employee ID</p><input type="text" name="input-eid"></label>
                     <div>
                         <label><p>Employee First Name</p><input type="text" name="input-fname"></label>

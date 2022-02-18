@@ -1,7 +1,29 @@
+<?php
+
+include 'connection.php';
+if(isset($_POST["submit"])){
+    $number = $_POST["Registration_number"];
+    $last = $_POST["Last_name"];
+    $first = $_POST["First_name"];
+    $birth = $_POST["Birth_date"];
+    $department = $_POST["Department"];
+    $salary = $_POST["Salary"];
+    $occupation = $_POST["Occupation"];
+    $picture = $_POST["Picture"];
 
 
+    $sql = "INSERT INTO `employee` (Registration_number, Last_name, First_name, Birth_date, Department, Salary, Occupation, Picture) 
+    VALUES ('$number','$last','$first','$birth','$department','$salary','$occupation');";
+    $result = mysqli_query($conn,$sql);
+    if($result){
+        echo "successful !!!!";
+    }else{
+        die(mysqli_error($conn));
+    }
+    
+}
 
-
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +86,7 @@
 </head>
 <body>
     <nav class="bg-dark">
-            <div id="nav-logo"><img src="logo.png" alt="My Employee List Logo"><h1>My Employee List</h1></div>
+            <div id="nav-logo"><img src="logo.png" alt="My Employee List Logo"><h1>HOME</h1></div>
     </nav>
     <section>
         <aside class="bg-dark">

@@ -1,15 +1,7 @@
 
 <?php
+include 'connection.php'
 
-$dbServername = "localhost";
-$dbUsername = "root";
-$dbPassword = "";
-$dbName = "gestion_employee";
-
-$conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-
-    $sql = "SELECT  EID, Picture, FirstName, LastName, DateofBirth, Department, Salary, Function  FROM employee";
-    $displyer = $conn -> query($sql);
 ?> 
 
 
@@ -52,7 +44,12 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             align-items: center;
             width: 80px;
             height: 100vh;
-
+        }
+        tbody td img {
+            width: 100px;
+        }
+        table tbody th {
+            background-color: #212529;
         }
         aside img {
             margin-top: 50px;
@@ -82,13 +79,41 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
         #selected-box {
             background-color: #fff;
         }
+        #content {
+            display: flex;
+            justify-content: center;
+        }
+        table {
+            margin-top: 50px;
+            width: 90%;
+            text-align: center;
+            
+        }
+        table th{
+            border-radius: 7px 7px 0px 0px;
+
+        }
+        th {
+            background-color: #212529;
+
+            color: #fff;
+            width: 250px;
+            height: 50px;
+        }
+        td {
+            border: .3px #212529 solid;
+        }
+        #action {
+            width: 350px;
+        }
+        
     </style>
 </head>
 <body>
 
 
     <nav class="bg-dark">
-            <div id="nav-logo"><img src="logo.png" alt="My Employee List Logo"><h1>My Employee List</h1></div>
+            <div id="nav-logo"><img src="logo.png" alt="My Employee List Logo"><h1>Employee List</h1></div>
     </nav>
     <section>
         <aside class="bg-dark">
@@ -98,7 +123,7 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             <a href="search.php"><img src="icon\search_icon.png" alt="Search for employee"></a>
         </aside>
         <main>
-            <div class="container">
+            <div class="container" id="content">
                 <table>
                     <thead>
                        <tr>
@@ -110,31 +135,56 @@ $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                            <th>Department</th>
                            <th>Salary</th>
                            <th>Function</th>
-                           <th>Action</th>
+                           <th id="action">Action</th>
                        </tr>
                     </thead>
                     <tbody>
 
                         <?php
-                            if ($displyer->num_rows > 0){
+                            $sql = "select * from `employee`";
+                            $result = mysqli_query($conn, $sql);
+
+                            if ($result){
                                     // output data of each row
-                                while($row = $displyer->fetch_assoc()) {
-                                    echo "<tr>
-                                            <td>".$row["EID"]."</td>
-                                            <td><img src='image/".$row["Picture"]."'></td>
-                                            <td>".$row["FirstName"]."</td>
-                                            <td>".$row["LastName"]."</td>
-                                            <td>".$row["DateofBirth"]."</td>
-                                            <td>".$row["Department"]."</td>
-                                            <td>".$row["Salary"]."</td>
-                                            <td>".$row["Function"]."</td>
-                                        </tr>";
+                                while($row =mysqli_fetch_assoc($result)) {
+                                    $Picture=$row['Picture'];
+                                    $EID=$row['EID'];
+                                    $FirstName=$row['FirstName'];
+                                    $LastName=$row['LastName'];
+                                    $DateofBirth=$row['DateofBirth'];
+                                    $Department=$row['Department'];
+                                    $Salary=$row['Salary'];
+                                    $Function=$row['Function'];
+
+
+                                    echo '<tr>
+                                        <td>'.$EID.'.</td>
+                                        <td><img src="image/'.$Picture.'"></td>
+                                        <td>'.$FirstName.'</td>
+                                        <td>'.$LastName.'</td>
+                                        <td>'.$DateofBirth.'</td>
+                                        <td>'.$Department.'</td>
+                                        <td>'.$Function.'</td>
+                                        <td>'.$Salary.'</td>
+                                        <td>
+                                        <a href="editEmployee.php?update='.$row['EID'].'"><button class="btn btn-info">UPDATE</button></a>
+                                        <a href="delete.php?EID='.$row['EID'].'"><button class="btn btn-danger">DELETE</button></a>
+                                        </td>
+                                    </tr>';
                                 }
                                 echo "</table>";
-                            }else{
+                                    }else{
                                 echo "0 results";
                                 }
+                            
                         ?>
+                        
+
+
+
+
+                
+                        
                     </tbody>
                 </table>
             </div>

@@ -63,7 +63,7 @@
 </head>
 <body>
     <nav class="bg-dark">
-            <div id="nav-logo"><img src="logo.png" alt="My Employee List Logo"><h1>My Employee List</h1></div>
+            <div id="nav-logo"><img src="logo.png" alt="My Employee List Logo"><h1>Search</h1></div>
     </nav>
     <section>
         <aside class="bg-dark">
