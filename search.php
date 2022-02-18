@@ -74,7 +74,18 @@
         </aside>
         <main>
             <div class="container">
-                <h1>biba</h1>
+                <div>
+                    <input type="search" name="" id="">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </main> 
     </section>

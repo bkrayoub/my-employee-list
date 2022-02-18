@@ -82,6 +82,20 @@ if(isset($_POST["submit"])){
         #selected-box {
             background-color: #fff;
         }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #contanet {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #contanet h1 {
+            font-size: 200px;
+        }
     </style>
 </head>
 <body>
@@ -96,8 +110,8 @@ if(isset($_POST["submit"])){
             <a href="search.php"><img src="icon\search_icon.png" alt="Search for employee"></a>
         </aside>
         <main>
-            <div class="container">
-                <h1>biba</h1>
+            <div class="container" id="contanet">
+                <h1>Welcome</h1>
             </div>
         </main> 
     </section>
