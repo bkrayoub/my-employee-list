@@ -1,4 +1,90 @@
-<?php
+<?php 
+ 
+
+include "connection.php";
+
+ if(isset($_POST['search'] )){
+     $searchkey = $_POST["serach"] ;
+    $sql = "SELECT * FROM employee WHERE FirstName LIKE '%$searchkey%'" ;
+ }
+  elseif(isset($_POST['select'] )){
+    $selectkey = $_POST["serach"] ; 
+    $sql = "SELECT * FROM employee WHERE FirstName LIKE '%$selectkey%'" ;
+
+ }
+ else{
+     $sql ="SELECT * FROM employee";
+     $result =mysqli_query($conn,$sql);
+ }
+?> 
+<form action="search.php" style="padding-left: 100px; padding-right:70px; margin-top:20px; " method="post" >
+<select style="height:40px !important; border-radius:7px;" name="select">
+        <option value="matricule">id</option>
+        <option value="nom">FirstName</option>
+        <option value="departemnt">LastName</option>
+      </select>
+    <input type="text" name="serach"class='form-control' placeholder="searche by name" value=""> <button class="btn">search</button>
+    <table border="1" class="table table-hover table-responsive">
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>Pecture</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date Of Birth</th>
+        <th>Departement</th>
+        <th>Salary</th>
+        <th>Function</th>
+        <th>Delete</th>
+        <th> Edit </th>
+    </tr>
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>Pecture</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date Of Birth</th>
+        <th>Departement</th>
+        <th>Salary</th>
+        <th>Function</th>
+        <th>Delete</th>
+        <th> Edit </th>
+    </tr>
+</thead>
+<tr>
+    <?php
+ $result =mysqli_query($conn,$sql);
+    while($row = mysqli_fetch_object( $result)){
+        ?>
+        <tr>
+        <td> <i class='fa fa-user 2x btn'   style="font-size:20px ; color:#2b219a ;" ></i><?php echo $row->Id?></td>
+        <td> <img src="img/<?php echo $row->image;?>"height="50" ></td>
+        <td><?php echo $row->FirstName ?></td>
+        <td><?php echo $row->LastName ?></td>
+        <td><?php echo $row->DateofBirth ?></td>
+        <td><?php echo $row->Departement ?></td>
+        <td><?php echo $row->Salary?>$</td>
+        <td><?php echo $row->Function ?></td>
+        <td>
+        <form action="select.php" method="post">
+            <input type="hidden" name="name" value="">
+            <a href="select.php?id=<?php echo $row->Id; ?>" onClick="return confirm('Are you sure you want to delete?')"> <i class='bx bx-trash icon 2x btn'   style="font-size:25px ; color:#695cfe ; background-color:#c8d6fd8e" ></i></a>
+                <?php
+                ?>
+            </form>
+        </td>
+        <td>
+            <a href="t.php? id=<?php echo $row->Id; ?>"> <i class='bx bx-edit icon 2x btn' style="font-size:25px ; color:#2b219a;background-color:#c8d6fd8e"></i></a>
+        </td>
+       <?php
+    }
+    ?>
+    </form>
+<?php 
+  include "bootstrap2.html"; 
+
+
 
 ?>
 <!DOCTYPE html>
@@ -75,13 +161,19 @@
         <main>
             <div class="container">
                 <div>
-                    <input type="search" name="" id="">
+                    <input type="search" name="search" id="">
                     <table>
                         <thead>
                             <tr>
-                                <th>
-                                    
-                                </th>
+                                <th>EID</th>
+                                <th>picture</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Date of berth</th>
+                                <th>Department</th>
+                                <th>Salary</th>
+                                <th>Function</th>
+                                <th id="action">Action</th>
                             </tr>
                         </thead>
                     </table>
